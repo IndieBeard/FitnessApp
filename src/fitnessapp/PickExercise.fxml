@@ -25,7 +25,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Bench Press" textAlignment="CENTER">
+                  <Button fx:id="benchPress" alignment="CENTER" mnemonicParsing="false" onAction="#exerciseSelectAction" text="Bench Press" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -34,7 +34,7 @@
             </VBox>
             <VBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Squats" textAlignment="CENTER">
+                  <Button fx:id="squat" alignment="CENTER" mnemonicParsing="false" onAction="#exerciseSelectAction" text="Squats" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -43,7 +43,7 @@
             </VBox>
             <VBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Lunge" textAlignment="CENTER">
+                  <Button fx:id="lunge" alignment="CENTER" mnemonicParsing="false" onAction="#exerciseSelectAction" text="Lunge" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -52,7 +52,7 @@
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="125.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Bicep Curl" textAlignment="CENTER">
+                  <Button fx:id="bicepCurl" alignment="CENTER" mnemonicParsing="false" onAction="#exerciseSelectAction" text="Bicep Curl" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>

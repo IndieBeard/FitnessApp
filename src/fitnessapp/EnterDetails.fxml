@@ -25,7 +25,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select an Exercise" GridPane.columnIndex="1">
+      <Text fx:id="exerciseName" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1">
          <font>
             <Font size="29.0" />
          </font>
@@ -66,12 +66,22 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Button fx:id="submit" mnemonicParsing="false" onAction="#submitButtonAction" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button fx:id="saveAndMenuButton" mnemonicParsing="false" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <font>
-            <Font size="26.0" />
+            <Font size="15.0" />
          </font>
       </Button>
       <Label fx:id="label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="Back">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveAndAddNewButton" layoutX="417.0" layoutY="355.0" mnemonicParsing="false" text="Save and Add New" GridPane.rowIndex="5">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets left="20.0" />
