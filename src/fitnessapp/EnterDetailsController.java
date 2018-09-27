@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -38,9 +39,33 @@ public class EnterDetailsController implements Initializable {
     
     @FXML
     private Button saveAndMenuButton;
-        
     
-    public void backButtonAction(ActionEvent event) throws IOException{
+    //References to each data field on the EnterDetails Screen.
+    @FXML
+    private TextField set1Rep;
+    @FXML
+    private TextField set1Weight;
+    @FXML
+    private TextField set2Rep;
+    @FXML
+    private TextField set2Weight;
+    @FXML
+    private TextField set3Rep;
+    @FXML
+    private TextField set3Weight;
+    @FXML
+    private TextField set4Rep;
+    @FXML
+    private TextField set4Weight;
+    
+    private Set set1;
+    private Set set2;
+    private Set set3;
+    private Set set4;
+        
+    //This method IS used, but not in this script. When the back button is pressed in the application it is called.
+    @FXML
+    private void backButtonAction(ActionEvent event) throws IOException{
         Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("PickExercise.fxml"));
         Scene pickExerciseScene = new Scene(pickExerciseParent);
         
@@ -52,11 +77,53 @@ public class EnterDetailsController implements Initializable {
         window.show();
     }
     
-    public void saveAndAddNewAction(ActionEvent event) throws IOException{
+    @FXML
+    //This method will get the information that was entered into the input boxes and save it in memory and print to console. Then return to the Pick Exercise screen
+    //NOTE: This inefficient method will be reworked in the next deliverable
+    private void saveAndAddNewAction(ActionEvent event) throws IOException{
+        //References to Set objects that will store the information if it is provided.
+
         
+        //if there is information in both input boxes for set 1
+        if(!set1Rep.getText().trim().equals("") && !set1Weight.getText().trim().equals("")){
+            int numRep = Integer.valueOf(set1Rep.getText());
+            double numWeight = Double.parseDouble(set1Weight.getText());
+            
+            set1 = new Set(numRep, numWeight);
+            System.out.println("The number of Reps for Set 1 are: " + set1.getReps());
+            System.out.println("The amount of Weight for Set 1 are: " + set1.getWeight());
+        }
+        
+        if(!set2Rep.getText().trim().equals("") && !set2Weight.getText().trim().equals("")){
+            int numRep = Integer.valueOf(set2Rep.getText());
+            double numWeight = Double.parseDouble(set2Weight.getText());
+            
+            set2 = new Set(numRep, numWeight);
+            System.out.println("The number of Reps for Set 2 are: " + set2.getReps());
+            System.out.println("The amount of Weight for Set 2 are: " + set2.getWeight());
+        }
+
+        if(!set3Rep.getText().trim().equals("") && !set3Weight.getText().trim().equals("")){
+            int numRep = Integer.valueOf(set3Rep.getText());
+            double numWeight = Double.parseDouble(set3Weight.getText());
+           
+            set3 = new Set(numRep, numWeight);
+            System.out.println("The number of Reps for Set 3 are: " + set3.getReps());
+            System.out.println("The amount of Weight for Set 3 are: " + set3.getWeight());
+        }
+
+        if(!set4Rep.getText().trim().equals("") && !set4Weight.getText().trim().equals("")){
+            int numRep = Integer.valueOf(set4Rep.getText());
+            double numWeight = Double.parseDouble(set4Weight.getText());
+            
+            set4 = new Set(numRep, numWeight);
+            System.out.println("The number of Reps for Set 4 are: " + set4.getReps());
+            System.out.println("The amount of Weight for Set 4 are: " + set4.getWeight());
+        }
+
     }
     
-    public void saveAndMenuAction(ActionEvent event) throws IOException{
+    private void saveAndMenuAction(ActionEvent event) throws IOException{
 
     }
             

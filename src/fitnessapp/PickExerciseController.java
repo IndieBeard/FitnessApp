@@ -51,8 +51,8 @@ public class PickExerciseController implements Initializable {
         System.out.println("Button Pressed!");
     } 
 */
-
-     public void exerciseSelectAction(ActionEvent event) throws IOException{
+    @FXML
+     private void exerciseSelectAction(ActionEvent event) throws IOException{
         Parent enterDetailsParent = FXMLLoader.load(getClass().getResource("EnterDetails.fxml"));
         Scene enterDetailsScene = new Scene(enterDetailsParent);
         
@@ -68,10 +68,6 @@ public class PickExerciseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-    }
-
-    private void enterWorkoutDetailsScene(ActionEvent event) throws IOException{
-
     }
     
 }

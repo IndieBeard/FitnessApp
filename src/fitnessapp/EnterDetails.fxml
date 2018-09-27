@@ -23,6 +23,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <Text fx:id="exerciseName" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1">
@@ -50,12 +51,12 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="set1Rep" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="set1Weight" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TextField fx:id="set2Rep" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="set2Weight" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField fx:id="set3Rep" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="set3Weight" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Text layoutX="10.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" GridPane.rowIndex="3">
          <font>
             <Font size="27.0" />
@@ -66,7 +67,7 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Button fx:id="saveAndMenuButton" mnemonicParsing="false" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button fx:id="saveAndMenuButton" mnemonicParsing="false" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="6">
          <font>
             <Font size="15.0" />
          </font>
@@ -77,11 +78,18 @@
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="saveAndAddNewButton" layoutX="417.0" layoutY="355.0" mnemonicParsing="false" text="Save and Add New" GridPane.rowIndex="5">
+      <Button fx:id="saveAndAddNewButton" layoutX="417.0" layoutY="355.0" mnemonicParsing="false" onAction="#saveAndAddNewAction" text="Save and Add New" GridPane.rowIndex="6">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Text layoutX="30.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="8.5546875" GridPane.rowIndex="5">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <TextField fx:id="set4Rep" layoutX="224.0" layoutY="255.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="set4Weight" layoutX="417.0" layoutY="255.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets left="20.0" />
