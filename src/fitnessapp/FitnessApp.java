@@ -23,6 +23,7 @@ public class FitnessApp extends Application {
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("Fitness Tracker");
         stage.setScene(scene);
         stage.show();
     }
