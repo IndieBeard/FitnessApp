@@ -66,24 +66,24 @@ public class EnterDetailsController implements Initializable {
     //This method IS used, but not in this script. When the back button is pressed in the application it is called.
     @FXML
     private void backButtonAction(ActionEvent event) throws IOException{
-        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("PickExercise.fxml"));
-        Scene pickExerciseScene = new Scene(pickExerciseParent);
-        
-        //This line gets the stage info
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        
-        window.setTitle(((Button)event.getSource()).getText());
-        window.setScene(pickExerciseScene);
-        window.show();
+        changeScene(event, "PickExercise.fxml");
     }
     
     @FXML
-    //This method will get the information that was entered into the input boxes and save it in memory and print to console. Then return to the Pick Exercise screen
-    //NOTE: This inefficient method will be reworked in the next deliverable
+    //This method will save the information that was entered into the input boxes, save it in memory and print to console. Then return to the Pick Exercise screen
     private void saveAndAddNewAction(ActionEvent event) throws IOException{
-        //References to Set objects that will store the information if it is provided.
-
-        
+        save();
+        changeScene(event, "PickExercise.fxml");
+    }
+    
+    @FXML
+    private void saveAndMenuAction(ActionEvent event) throws IOException{
+        save();
+        changeScene(event, "SplashScreen.fxml");
+    }
+    
+    //NOTE: This inefficient method will be reworked in the next deliverable
+    private void save(){
         //if there is information in both input boxes for set 1
         if(!set1Rep.getText().trim().equals("") && !set1Weight.getText().trim().equals("")){
             int numRep = Integer.valueOf(set1Rep.getText());
@@ -120,11 +120,18 @@ public class EnterDetailsController implements Initializable {
             System.out.println("The number of Reps for Set 4 are: " + set4.getReps());
             System.out.println("The amount of Weight for Set 4 are: " + set4.getWeight());
         }
-
     }
     
-    private void saveAndMenuAction(ActionEvent event) throws IOException{
-
+    private void changeScene(ActionEvent event, String sceneName) throws IOException{
+        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource(sceneName));
+        Scene pickExerciseScene = new Scene(pickExerciseParent);
+        
+        //This line gets the stage info
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        
+        window.setTitle(((Button)event.getSource()).getText());
+        window.setScene(pickExerciseScene);
+        window.show();
     }
             
 

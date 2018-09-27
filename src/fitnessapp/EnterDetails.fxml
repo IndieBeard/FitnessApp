@@ -67,7 +67,7 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Button fx:id="saveAndMenuButton" mnemonicParsing="false" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <Button fx:id="saveAndMenuButton" mnemonicParsing="false" onAction="#saveAndMenuAction" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="6">
          <font>
             <Font size="15.0" />
          </font>
