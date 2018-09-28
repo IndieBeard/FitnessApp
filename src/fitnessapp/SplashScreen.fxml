@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="fitnessapp.SplashScreenController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnessapp.SplashScreenController">
     <children>
         <Button fx:id="button" layoutX="107.0" layoutY="86.0" onAction="#startWorkoutButtonPushed" text="Begin Workout!">
          <font>
@@ -18,5 +18,6 @@
             <Font size="28.0" />
          </font>
       </Text>
+      <Button fx:id="close" layoutX="135.0" layoutY="137.0" mnemonicParsing="false" onAction="#closeButtonAction" text="Exit" />
     </children>
 </AnchorPane>

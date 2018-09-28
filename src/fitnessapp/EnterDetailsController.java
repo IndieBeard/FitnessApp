@@ -6,17 +6,13 @@
 package fitnessapp;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author andyr
  */
-public class EnterDetailsController implements Initializable {
+public class EnterDetailsController {
     
     @FXML
     private Text exerciseName;
@@ -122,26 +118,18 @@ public class EnterDetailsController implements Initializable {
         }
     }
     
+    //Will change the scene to whatever is passed into it
     private void changeScene(ActionEvent event, String sceneName) throws IOException{
-        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource(sceneName));
-        Scene pickExerciseScene = new Scene(pickExerciseParent);
+        Parent parent = FXMLLoader.load(getClass().getResource(sceneName));
+        Scene scene = new Scene(parent);
         
         //This line gets the stage info
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         
         window.setTitle(((Button)event.getSource()).getText());
-        window.setScene(pickExerciseScene);
+        window.setScene(scene);
         window.show();
     }
-            
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
     
     //This method is public so it can be accessed from the previous screen.
     //This method will set the name of the workout to reflect the button pressed
