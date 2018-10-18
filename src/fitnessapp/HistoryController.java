@@ -112,7 +112,7 @@ public class HistoryController implements Initializable {
         return workoutList;
     }
 
-    //This will add a new line to the grid pane and update it with workout date and set
+    //This will add a new line to the grid pane and update it with workout date and workout information
     private void addNewLine(ArrayList<Workout> workoutList) {
         int lineCounter = 0;
         for (Workout workout : workoutList) {
