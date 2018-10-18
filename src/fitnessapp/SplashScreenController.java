@@ -22,13 +22,19 @@ import javafx.stage.Stage;
 public class SplashScreenController {
     
     @FXML
-    private Button close;
+    private Button startWorkoutButton;
+    
+    @FXML
+    private Button historyButton;
+    
+    @FXML
+    private Button exitButton;
     
     //When this method is called, it will change the the Workout Screen
     //we want to read from the button to get the scene and then we can get the stage from the scene
-    //Is public so it can be called from the main class.
-    public void startWorkoutButtonPushed(ActionEvent event) throws IOException{
-        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("PickExercise.fxml"));
+    @FXML
+    private void startWorkoutButtonAction(ActionEvent event) throws IOException{
+        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("EnterDetails.fxml"));
         Scene pickExerciseScene = new Scene(pickExerciseParent);
         
         //This line gets the stage info
@@ -38,10 +44,22 @@ public class SplashScreenController {
         window.show();
     }
     
+   @FXML
+   private void historyButtonAction(ActionEvent event) throws IOException{
+        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("History.fxml"));
+        Scene pickExerciseScene = new Scene(pickExerciseParent);
+
+        //This line gets the stage info
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(pickExerciseScene);
+        window.show();
+   }
+    
     @FXML
     //Will close the app
     private void closeButtonAction(){
-        Stage stage = (Stage) close.getScene().getWindow();
+        Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
     

@@ -52,12 +52,12 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TextField fx:id="set1Rep" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="set1Weight" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <TextField fx:id="set2Rep" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField fx:id="set2Weight" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField fx:id="set3Rep" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField fx:id="set3Weight" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="set1Rep" promptText="Enter an Int" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="set1Weight" promptText="Enter a Double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TextField fx:id="set2Rep" promptText="Enter an Int" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="set2Weight" promptText="Enter a Double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField fx:id="set3Rep" promptText="Enter an Int" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="set3Weight" promptText="Enter a Double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Text layoutX="10.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" GridPane.rowIndex="3">
          <font>
             <Font size="27.0" />
@@ -74,12 +74,12 @@
          </font>
       </Button>
       <Label fx:id="label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="Back">
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="Back" GridPane.rowIndex="7">
          <font>
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="saveAndAddNewButton" layoutX="417.0" layoutY="355.0" mnemonicParsing="false" onAction="#saveAndAddNewAction" text="Save and Add New" GridPane.rowIndex="7">
+      <Button fx:id="saveAndAddNewButton" layoutX="417.0" layoutY="355.0" mnemonicParsing="false" onAction="#saveAndAddNewAction" text="Save and Add New" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <font>
             <Font size="18.0" />
          </font>
@@ -89,15 +89,28 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TextField fx:id="set4Rep" layoutX="224.0" layoutY="255.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField fx:id="set4Weight" layoutX="417.0" layoutY="255.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Label fx:id="confirmation" prefHeight="50.0" prefWidth="220.0" text="Entered data prints to console" GridPane.rowIndex="6">
+      <TextField fx:id="set4Rep" layoutX="224.0" layoutY="255.0" promptText="Enter an Int" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="set4Weight" layoutX="417.0" layoutY="255.0" promptText="Enter a Double" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="174.93798828125" GridPane.columnIndex="1">
          <font>
-            <Font size="14.0" />
+            <Font size="27.0" />
          </font>
-      </Label>
-      <Label text="Please enter an Int" GridPane.columnIndex="1" />
-      <Label text="Please enter a double" GridPane.columnIndex="2" />
+      </Text>
+      <TextField fx:id="date" promptText="Date MM/DD" GridPane.columnIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="exercise" promptText="Exercise">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your info" textAlignment="CENTER" wrappingWidth="194.13671875" GridPane.columnIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
    <padding>
       <Insets left="20.0" />
