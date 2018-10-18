@@ -13,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
 import javafx.stage.Stage;
 
 /**
@@ -22,6 +21,10 @@ import javafx.stage.Stage;
  * @author andyr
  */
 public class PickExerciseController {
+
+    
+    @FXML
+    private Button button;
     
     @FXML
      private void exerciseSelectAction(ActionEvent event) throws IOException{
@@ -46,5 +49,6 @@ public class PickExerciseController {
     }
      
    
+    
     
 }

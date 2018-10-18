@@ -193,6 +193,9 @@ public class EnterDetailsController {
         window.setScene(scene);
         window.show();
     }
+            
+
+ 
     
     //This method is public so it can be accessed from the previous screen.
     //This method will set the name of the workout to reflect the button pressed
