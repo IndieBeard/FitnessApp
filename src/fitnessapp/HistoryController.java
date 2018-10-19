@@ -6,7 +6,6 @@
 package fitnessapp;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -15,20 +14,30 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javax.json.JsonObject;
-import javax.json.stream.JsonParser;
+import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
@@ -42,6 +51,9 @@ public class HistoryController implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
+    
+    @FXML
+    private Button backButton;
 
     /**
      * Initializes the controller class.
@@ -70,22 +82,26 @@ public class HistoryController implements Initializable {
         try {
             // When page is opened, read the file Workouts.json,
             //convert the json into an arraylist of Workouts
-            //update the list of workouts completed on the grid
-
-            addNewLine(objectFromJson());
+            //Sort that list by date
+            //update the list of workouts completed on the grid sorting by date
+            addNewLine(byDate(objectFromJson()));
+            
         } catch (IOException ex) {
             Logger.getLogger(HistoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    private void backButtonAction(ActionEvent event) throws IOException {
+        changeScene(event, "SplashScreen.fxml");
+    }
 
     //Will read "Workout.json" and "convert" it into an arraylist of Workout objects, stored in workoutList
+    //Code inspired from inclass examples
     private ArrayList<Workout> objectFromJson() throws FileNotFoundException, IOException {
 
         ArrayList<Workout> workoutList = new ArrayList<>();
         Gson gson = new Gson();
-
-        System.out.println("Reading JSON from a file");
-        System.out.println("----------------------------");
 
         BufferedReader br = new BufferedReader(
                 new FileReader("Workouts.json"));
@@ -93,33 +109,66 @@ public class HistoryController implements Initializable {
 
         while ((line = br.readLine()) != null) {
             //convert the json string back to object
-            //Workout workout = new GsonBuilder().create().fromJson(line, Workout.class);
-            //workoutList.add(workout);
-
             JsonElement json = gson.fromJson(line, JsonElement.class);
             String jsonInString = gson.toJson(json);
-            System.out.println(jsonInString);
             Type workoutType = new TypeToken<Workout>() {
             }.getType();
             Workout workout = gson.fromJson(jsonInString, workoutType);
             workoutList.add(workout);
         }
 
-        for (Workout workout : workoutList) {
-            System.out.println(workout.getDate());
-        }
-
         return workoutList;
     }
+    
+    //This method will loop through the array list of workouts and sort them into their own arraylists of workouts
+    //organized by date.
+    //Code inspired by info at https://stackoverflow.com/questions/43426669/java-sort-list-object-by-date-ascending
+    private List<Workout> byDate(ArrayList<Workout> workoutList){
+        
+        
+        SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");
+        List<Workout> sorted = workoutList.stream().sorted(
+                (Workout a, Workout b)->
+        {
+            try {
+                return format.parse(a.getDate()).compareTo(format.parse(b.getDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+        ).collect(Collectors.toList());
+
+        return sorted;
+    }
+    
+    
 
     //This will add a new line to the grid pane and update it with workout date and workout information
-    private void addNewLine(ArrayList<Workout> workoutList) {
+    private void addNewLine(List<Workout> workoutList) {
         int lineCounter = 0;
         for (Workout workout : workoutList) {
             infoPanel.add(new Label(workout.getDate()), 0, lineCounter);
-            infoPanel.add(new Label(workout.getSets().size() + " x " + workout.getExercise() + "\n"), 1, lineCounter);
+            int index = 1;
+            Label details = new Label(workout.getExercise() + "\n");
+            for(Set set : workout.getSets()){
+                details.setText(details.getText() + "Set" + (index++) + ". " + set.getReps() + " x " + set.getWeight() + "\n");
+            }
+            infoPanel.add(details, 1, lineCounter);
             lineCounter++;
         }
+    }
+    
+    private void changeScene(ActionEvent event, String sceneName) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource(sceneName));
+        Scene scene = new Scene(parent);
+
+        //This line gets the stage info
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setTitle(((Button) event.getSource()).getText());
+        window.setScene(scene);
+        window.show();
     }
 
 }

@@ -17,7 +17,7 @@ public class Workout {
     private final String date;
     private final ArrayList<Set> sets;
     
-    public Workout(String _exercise, String _date, ArrayList _sets){
+    public Workout(String _exercise, String _date, ArrayList<Set> _sets){
         exercise = _exercise;
         date = _date;
         sets = _sets;
