@@ -11,6 +11,10 @@ package fitnessapp;
  */
 public class Set {
     
+    
+    //make set implement the java collection Set
+    //For deliv 4, public class ExerciseSet implements Set
+    
     private final int reps;
     private final double weight;
     
