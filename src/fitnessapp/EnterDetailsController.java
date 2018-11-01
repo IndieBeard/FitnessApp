@@ -24,6 +24,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -78,13 +81,11 @@ public class EnterDetailsController {
     private Set set3;
     private Set set4;
     private final ArrayList<Set> setList = new ArrayList<>();
-    
     private int exerciseSetNumberCounter = 2; //Starts at 2 because 1 will always be first, 
     private int newRowButtonCounter = 3; //This is the starting row of the add button
     private int navigationButtonCounter = 4; //Starting row of the bottom navigation buttons
-    
     private int numberOfRowsToLoop = 1;
-    private final int gridPaneWidth = 3;
+    private final int numberOfColsToLoop = 2;
     private final int gridPaneHeight = 5;
 
     //This method IS used, but not in this script. When the back button is pressed in the application it is called.
@@ -94,16 +95,21 @@ public class EnterDetailsController {
     }
 
     @FXML
-    //This method will save the information that was entered into the input boxes, save it in memory and print to console. Then return to the Pick Exercise screen
+    //This method will save the information that was entered into the input boxes
     private void saveAndAddNewAction(ActionEvent event) throws IOException {
-        save();
-        changeScene(event, "EnterDetails.fxml");
+        //If the data passes the check, then save the data and refresh the scene
+        if (checkDataEntered()) {
+            save();
+            changeScene(event, "EnterDetails.fxml");
+        }
     }
 
     @FXML
     private void saveAndMenuAction(ActionEvent event) throws IOException {
-        save();
-        changeScene(event, "SplashScreen.fxml");
+        if (checkDataEntered()) {
+            save();
+            changeScene(event, "SplashScreen.fxml");
+        }
     }
 
     @FXML
@@ -121,20 +127,15 @@ public class EnterDetailsController {
         TextField repInputField = new TextField();
         TextField weightInputField = new TextField();
 
-        // bind controls to person:
-        //firstNameTextField.textProperty().bindBidirectional(person.firstNameProperty());
-        //lastNameTextField.textProperty().bindBidirectional(person.lastNameProperty());
-        //dateOfBirthPicker.valueProperty().bindBidirectional(person.dateOfBirthProperty());
         // add controls to grid:
-        //gridPane.add(numberOfRowsToLoop + 2, setNumberText, repInputField, weightInputField);
-        gridPane.add(setNumberText, 0, numberOfRowsToLoop +2);
-        gridPane.add(repInputField, 1, numberOfRowsToLoop +2);
-        gridPane.add(weightInputField, 2, numberOfRowsToLoop +2);
+        gridPane.add(setNumberText, 0, numberOfRowsToLoop + 2);
+        gridPane.add(repInputField, 1, numberOfRowsToLoop + 2);
+        gridPane.add(weightInputField, 2, numberOfRowsToLoop + 2);
         numberOfRowsToLoop++;
-        
+
         newRowButtonCounter++;
         navigationButtonCounter++;
-        
+
         //Move the other things down on the grid rows
         GridPane.setRowIndex(addNewRowButton, newRowButtonCounter);
         GridPane.setRowIndex(backButton, navigationButtonCounter);
@@ -143,75 +144,85 @@ public class EnterDetailsController {
 
     }
 
-    //NOTE: This inefficient method will be reworked in the next deliverable
+    //This method will check the data entered into the text box to make sure
+    //There is an exercise name entered.
+    //There is a date entered in the correct format
+    //The correct data type is entered for reps and weight
+    //If there is an error, then generate the appropriate error message.
+    private boolean checkDataEntered() {
+        
+        //TODO Check date format is correct
+
+        //This code is a similar loop that is used in Save()
+        //However this will make sure that each box is filled out correctly.
+        for (int row = 2; row < numberOfRowsToLoop + 2; row++) {
+            for (int col = 1; col <= numberOfColsToLoop; col++) {
+                TextField textField = getNodeByRowColumnIndex(row, col, gridPane);
+                String stringFromInputBox = textField.getText();
+
+                //If it is in the first column (Number of Reps Input), check if it's a int
+                if (col == 1 && !"".equals(stringFromInputBox)) {
+                    try {
+                        Integer.parseInt(stringFromInputBox);
+                    } catch (NumberFormatException e) {
+                        Alert alert = new Alert(AlertType.ERROR, "You have a non-Int in reps!", ButtonType.CLOSE);
+                        alert.showAndWait();
+                        return false;
+                    }
+
+                    //If it's not, (2nd column) (Weight Input), check if its a double
+                } else {
+                    if (!"".equals(stringFromInputBox)) {
+                        try {
+                            Double.parseDouble(stringFromInputBox);
+                        } catch (NumberFormatException e) {
+                            Alert alert = new Alert(AlertType.ERROR, "You have a non-Double in Weight!", ButtonType.CLOSE);
+                            alert.showAndWait();
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        //If you've made it this far, the data is correct and passes!
+        return true;
+    }
+
     private void save() throws IOException {
 
-        /*
-        //if there is information in both input boxes for set 1
-        if (!set1Rep.getText().trim().equals("") && !set1Weight.getText().trim().equals("")) {
-            int numRep = Integer.valueOf(set1Rep.getText());
-            double numWeight = Double.parseDouble(set1Weight.getText());
+        checkDataEntered();
 
-            set1 = new Set(numRep, numWeight);
-            setList.add(set1);
-
-        }
-
-        if (!set2Rep.getText().trim().equals("") && !set2Weight.getText().trim().equals("")) {
-            int numRep = Integer.valueOf(set2Rep.getText());
-            double numWeight = Double.parseDouble(set2Weight.getText());
-
-            set2 = new Set(numRep, numWeight);
-            setList.add(set2);
-
-        }
-
-        if (!set3Rep.getText().trim().equals("") && !set3Weight.getText().trim().equals("")) {
-            int numRep = Integer.valueOf(set3Rep.getText());
-            double numWeight = Double.parseDouble(set3Weight.getText());
-
-            set3 = new Set(numRep, numWeight);
-            setList.add(set3);
-
-        }
-
-        if (!set4Rep.getText().trim().equals("") && !set4Weight.getText().trim().equals("")) {
-            int numRep = Integer.valueOf(set4Rep.getText());
-            double numWeight = Double.parseDouble(set4Weight.getText());
-
-            set4 = new Set(numRep, numWeight);
-            setList.add(set4);
-
-        }
-
-        //For testing to ensure data is recorded correctly.  
-        int index = 1;
-        for (Set set : setList) {
-            //System.out.println("The number of Reps for Set " + (index) + " are: " + set.getReps());
-            //System.out.println("The amount of Weight for Set " + (index++) + " are: " + set.getWeight());
-        }
-
-         
+        //Loop through each of the lines and save what is entered.
+        //We loop number of rows to loop + 2, because it will start at the correct node
         //Everytime we press the plus button, we'll add one to our Number of Rows 
         //Looping through Gridpane, we always start at Row 2, Col 1
         //Then Row 2, Col 2, Row 3 col 3, and so on
-        Node[][] gridPaneNodes = new Node[3][gridPaneHeight];
-        for (Node child : gridPane.getChildren()) {
-            Integer col = GridPane.getColumnIndex(child);
-            Integer row = GridPane.getRowIndex(child);
-            if (col != null && row != null) {
-                Node node = gridPane.
-            }
-        }
-
-        
-         */
         for (int row = 2; row < numberOfRowsToLoop + 2; row++) {
-            for (int col = 1; col < gridPaneWidth; col++) {
+            int numRep = 0;
+            Double numWeight = null;
+            Set set;
+            for (int col = 1; col <= numberOfColsToLoop; col++) {
                 TextField textField = getNodeByRowColumnIndex(row, col, gridPane);
-                String stringFromBox = textField.getText();
-                System.out.println(stringFromBox);
+                String stringFromInputBox = textField.getText();
+
+                if (col == 1) {
+                    if (!"".equals(stringFromInputBox)) {
+                        numRep = Integer.valueOf(stringFromInputBox);
+                    } else {
+                        numRep = 0;
+                    }
+                } else {
+                    if (!"".equals(stringFromInputBox)) {
+                        numWeight = Double.parseDouble(stringFromInputBox);
+                    } else {
+                        numWeight = 0.0;
+                    }
+                }
+
             }
+            set = new Set(numRep, numWeight);
+            setList.add(set);
         }
 
         Workout workoutToSave = new Workout(exercise.getText(), date.getText(), setList);
