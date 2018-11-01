@@ -23,6 +23,9 @@ import javax.json.JsonArrayBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -42,7 +45,13 @@ public class EnterDetailsController {
     @FXML
     private Button saveAndMenuButton;
 
+    @FXML
+    private Button addNewRowButton;
+
     //References to each data field on the EnterDetails Screen.
+    @FXML
+    private GridPane gridPane;
+
     @FXML
     private TextField exercise;
     @FXML
@@ -69,6 +78,14 @@ public class EnterDetailsController {
     private Set set3;
     private Set set4;
     private final ArrayList<Set> setList = new ArrayList<>();
+    
+    private int exerciseSetNumberCounter = 2; //Starts at 2 because 1 will always be first, 
+    private int newRowButtonCounter = 3; //This is the starting row of the add button
+    private int navigationButtonCounter = 4; //Starting row of the bottom navigation buttons
+    
+    private int numberOfRowsToLoop = 1;
+    private final int gridPaneWidth = 3;
+    private final int gridPaneHeight = 5;
 
     //This method IS used, but not in this script. When the back button is pressed in the application it is called.
     @FXML
@@ -89,8 +106,47 @@ public class EnterDetailsController {
         changeScene(event, "SplashScreen.fxml");
     }
 
+    @FXML
+    private void addNewRowAction(ActionEvent event) throws IOException {
+        addNewRow();
+    }
+
+    private void addNewRow() {
+
+        // create controls:
+        Text setNumberText = new Text();
+        setNumberText.setText(Integer.toString(exerciseSetNumberCounter));
+        exerciseSetNumberCounter++;
+
+        TextField repInputField = new TextField();
+        TextField weightInputField = new TextField();
+
+        // bind controls to person:
+        //firstNameTextField.textProperty().bindBidirectional(person.firstNameProperty());
+        //lastNameTextField.textProperty().bindBidirectional(person.lastNameProperty());
+        //dateOfBirthPicker.valueProperty().bindBidirectional(person.dateOfBirthProperty());
+        // add controls to grid:
+        //gridPane.add(numberOfRowsToLoop + 2, setNumberText, repInputField, weightInputField);
+        gridPane.add(setNumberText, 0, numberOfRowsToLoop +2);
+        gridPane.add(repInputField, 1, numberOfRowsToLoop +2);
+        gridPane.add(weightInputField, 2, numberOfRowsToLoop +2);
+        numberOfRowsToLoop++;
+        
+        newRowButtonCounter++;
+        navigationButtonCounter++;
+        
+        //Move the other things down on the grid rows
+        GridPane.setRowIndex(addNewRowButton, newRowButtonCounter);
+        GridPane.setRowIndex(backButton, navigationButtonCounter);
+        GridPane.setRowIndex(saveAndAddNewButton, navigationButtonCounter);
+        GridPane.setRowIndex(saveAndMenuButton, navigationButtonCounter);
+
+    }
+
     //NOTE: This inefficient method will be reworked in the next deliverable
     private void save() throws IOException {
+
+        /*
         //if there is information in both input boxes for set 1
         if (!set1Rep.getText().trim().equals("") && !set1Weight.getText().trim().equals("")) {
             int numRep = Integer.valueOf(set1Rep.getText());
@@ -135,8 +191,47 @@ public class EnterDetailsController {
             //System.out.println("The amount of Weight for Set " + (index++) + " are: " + set.getWeight());
         }
 
+         
+        //Everytime we press the plus button, we'll add one to our Number of Rows 
+        //Looping through Gridpane, we always start at Row 2, Col 1
+        //Then Row 2, Col 2, Row 3 col 3, and so on
+        Node[][] gridPaneNodes = new Node[3][gridPaneHeight];
+        for (Node child : gridPane.getChildren()) {
+            Integer col = GridPane.getColumnIndex(child);
+            Integer row = GridPane.getRowIndex(child);
+            if (col != null && row != null) {
+                Node node = gridPane.
+            }
+        }
+
+        
+         */
+        for (int row = 2; row < numberOfRowsToLoop + 2; row++) {
+            for (int col = 1; col < gridPaneWidth; col++) {
+                TextField textField = getNodeByRowColumnIndex(row, col, gridPane);
+                String stringFromBox = textField.getText();
+                System.out.println(stringFromBox);
+            }
+        }
+
         Workout workoutToSave = new Workout(exercise.getText(), date.getText(), setList);
         objToJSON(workoutToSave);
+    }
+
+    public TextField getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        TextField result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if (GridPane.getRowIndex(node) != null && GridPane.getColumnIndex(node) != null) {
+                if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+                    result = (TextField) node;
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 
     //This will convert the workout object to JSON and write it to a file called "Workouts.json"
