@@ -23,6 +23,8 @@ import javax.json.JsonArrayBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -59,34 +61,13 @@ public class EnterDetailsController {
     private TextField exercise;
     @FXML
     private TextField date;
-    @FXML
-    private TextField set1Rep;
-    @FXML
-    private TextField set1Weight;
-    @FXML
-    private TextField set2Rep;
-    @FXML
-    private TextField set2Weight;
-    @FXML
-    private TextField set3Rep;
-    @FXML
-    private TextField set3Weight;
-    @FXML
-    private TextField set4Rep;
-    @FXML
-    private TextField set4Weight;
 
-    private Set set1;
-    private Set set2;
-    private Set set3;
-    private Set set4;
     private final ArrayList<Set> setList = new ArrayList<>();
     private int exerciseSetNumberCounter = 2; //Starts at 2 because 1 will always be first, 
     private int newRowButtonCounter = 3; //This is the starting row of the add button
     private int navigationButtonCounter = 4; //Starting row of the bottom navigation buttons
     private int numberOfRowsToLoop = 1;
     private final int numberOfColsToLoop = 2;
-    private final int gridPaneHeight = 5;
 
     //This method IS used, but not in this script. When the back button is pressed in the application it is called.
     @FXML
@@ -149,9 +130,20 @@ public class EnterDetailsController {
     //There is a date entered in the correct format
     //The correct data type is entered for reps and weight
     //If there is an error, then generate the appropriate error message.
+    //Code inspired by https://stackoverflow.com/questions/33968333/how-to-check-if-a-string-is-date and extrapolating on that
     private boolean checkDataEntered() {
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/DD/YY");
         
-        //TODO Check date format is correct
+        try {
+            dateFormat.parse(date.getText());
+        } catch (ParseException pe) {
+            Alert alert = new Alert(AlertType.ERROR, "Date must be entered in MM/DD/YY format!", ButtonType.CLOSE);
+            alert.showAndWait();
+            return false;
+        }
+        
 
         //This code is a similar loop that is used in Save()
         //However this will make sure that each box is filled out correctly.
@@ -184,9 +176,9 @@ public class EnterDetailsController {
                 }
             }
         }
-
-        //If you've made it this far, the data is correct and passes!
+        
         return true;
+        
     }
 
     private void save() throws IOException {
@@ -229,6 +221,8 @@ public class EnterDetailsController {
         objToJSON(workoutToSave);
     }
 
+    //Code inspired by https://stackoverflow.com/questions/20825935/javafx-get-node-by-row-and-column
+    //This will return the Textfield that is located in whatever row, column, index we pass in.
     public TextField getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
         TextField result = null;
         ObservableList<Node> childrens = gridPane.getChildren();
@@ -291,9 +285,4 @@ public class EnterDetailsController {
         window.show();
     }
 
-    //This method is public so it can be accessed from the previous screen.
-    //This method will set the name of the workout to reflect the button pressed
-    //public void setExerciseTitle(String name) {
-    //    exerciseName.setText(name);
-    //}
 }

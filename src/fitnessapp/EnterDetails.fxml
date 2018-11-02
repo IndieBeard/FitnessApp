@@ -43,11 +43,7 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Text layoutX="10.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.rowIndex="2">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Text>
+      <Text layoutX="10.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.rowIndex="2" />
       <TextField fx:id="set1Rep" promptText="Enter an Int" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="set1Weight" promptText="Enter a Double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="saveAndMenuButton" mnemonicParsing="false" onAction="#saveAndMenuAction" text="Save and Quit To Menu" GridPane.columnIndex="2" GridPane.rowIndex="4">
@@ -70,7 +66,7 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TextField fx:id="date" promptText="Date MM/DD" GridPane.columnIndex="2">
+      <TextField fx:id="date" promptText="Date MM/DD/YY" GridPane.columnIndex="2">
          <font>
             <Font size="20.0" />
          </font>
