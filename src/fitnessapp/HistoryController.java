@@ -17,8 +17,10 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -54,6 +56,8 @@ public class HistoryController implements Initializable {
     
     @FXML
     private Button backButton;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -124,26 +128,12 @@ public class HistoryController implements Initializable {
     //organized by date.
     //Code inspired by info at https://stackoverflow.com/questions/43426669/java-sort-list-object-by-date-ascending
     private List<Workout> byDate(ArrayList<Workout> workoutList){
-        
-        
-        SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");
-        List<Workout> sorted = workoutList.stream().sorted(
-                (Workout a, Workout b)->
-        {
-            try {
-                return format.parse(a.getDate()).compareTo(format.parse(b.getDate()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }
-        ).collect(Collectors.toList());
-
-        return sorted;
+ 
+       Collections.sort(workoutList);
+       
+        return workoutList;
     }
     
-    
-
     //This will add a new line to the grid pane and update it with workout date and workout information
     private void addNewLine(List<Workout> workoutList) {
         int lineCounter = 0;
