@@ -46,13 +46,13 @@ public class SplashScreenController {
     
    @FXML
    private void historyButtonAction(ActionEvent event) throws IOException{
-        Parent pickExerciseParent = FXMLLoader.load(getClass().getResource("History.fxml"));
-        Scene pickExerciseScene = new Scene(pickExerciseParent);
+        Parent historyParent = FXMLLoader.load(getClass().getResource("History.fxml"));
+        Scene historyScene = new Scene(historyParent);
 
         //This line gets the stage info
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        window.setScene(pickExerciseScene);
+        window.setScene(historyScene);
         window.show();
    }
     

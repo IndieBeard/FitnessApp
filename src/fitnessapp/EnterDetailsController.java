@@ -8,7 +8,6 @@ package fitnessapp;
 import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

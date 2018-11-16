@@ -7,7 +7,6 @@ package fitnessapp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.logging.Level;
@@ -21,7 +20,6 @@ public class Workout implements Comparable<Workout> {
     
     private final String exercise;
     private final String date;
-    //private final ArrayList<Set> sets;
     private LinkedHashSet<Set> sets = new LinkedHashSet<>();
     
     
