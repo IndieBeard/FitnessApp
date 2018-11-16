@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,11 +21,12 @@ public class Workout implements Comparable<Workout> {
     
     private final String exercise;
     private final String date;
-    private final ArrayList<Set> sets;
+    //private final ArrayList<Set> sets;
+    private LinkedHashSet<Set> sets = new LinkedHashSet<>();
     
     
     
-    public Workout(String _exercise, String _date, ArrayList<Set> _sets){
+    public Workout(String _exercise, String _date, LinkedHashSet<Set> _sets){
         exercise = _exercise;
         date = _date;
         sets = _sets;
@@ -38,7 +40,7 @@ public class Workout implements Comparable<Workout> {
         return date;
     }
     
-    public ArrayList<Set> getSets(){
+    public LinkedHashSet<Set> getSets(){
         return sets;
     }
 

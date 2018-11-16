@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -62,7 +63,7 @@ public class EnterDetailsController {
     @FXML
     private TextField date;
 
-    private final ArrayList<Set> setList = new ArrayList<>();
+    private final LinkedHashSet<Set> setList = new LinkedHashSet<>();
     private int exerciseSetNumberCounter = 2; //Starts at 2 because 1 will always be first, 
     private int newRowButtonCounter = 3; //This is the starting row of the add button
     private int navigationButtonCounter = 4; //Starting row of the bottom navigation buttons

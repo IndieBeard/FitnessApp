@@ -141,6 +141,7 @@ public class HistoryController implements Initializable {
             infoPanel.add(new Label(workout.getDate()), 0, lineCounter);
             int index = 1;
             Label details = new Label(workout.getExercise() + "\n");
+            //Loop through the LinkedHashSet for each workout
             for(Set set : workout.getSets()){
                 details.setText(details.getText() + "Set" + (index++) + ". " + set.getReps() + " x " + set.getWeight() + "\n");
             }
